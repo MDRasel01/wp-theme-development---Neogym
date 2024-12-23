@@ -30,52 +30,47 @@
 
  
 <body>
+  <!-- header section  -->
   <div class="hero_area">
     <!-- header section strats -->
-    <header class="header_section">
-      <div class="container-fluid">
-        <nav class="navbar navbar-expand-lg custom_nav-container ">
-          <a class="navbar-brand" href="index.html">
-            <span>
-              Neogym
-            </span>
-          </a>
-          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-
-          <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <div class="d-flex ml-auto flex-column flex-lg-row align-items-center">
-              <ul class="navbar-nav  ">
-                <li class="nav-item active">
-                  <a class="nav-link" href="index.html">Home <span class="sr-only">(current)</span></a>
-                </li>
-                <li class="nav-item ">
-                  <a class="nav-link" href="why.html"> Why us </a>
-                </li>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="trainer.html"> trainers</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="contact.html"> Contact Us</a>
-                </li>
-              </ul>
-              <div class="user_option">
-                <form class="form-inline my-2 my-lg-0 ml-0 ml-lg-4 mb-3 mb-lg-0">
-                  <button class="btn  my-2 my-sm-0 nav_search-btn" type="submit"></button>
-                </form>
-              </div>
-            </div>
-          </div>
-        </nav>
-      </div>
-    </header>
+      <?php get_header();?>
     <!-- end header section -->
     <!-- slider section -->
     <section class=" slider_section position-relative">
       <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
         <div class="carousel-inner">
+
+          <?php
+          
+
+            
+          // if(have_posts()):
+          //   while(have_posts()):the_post();
+          //     the_title();
+          //     the_content();
+          //   endwhile;
+          //   else:
+          //     echo " post nai";
+          // endif;
+
+          $myarguments= array(
+            'post_type' => 'student',
+          );
+
+          $the_query = new WP_Query( $myarguments );
+          
+          while($the_query ->have_posts()){
+                $the_query -> the_post();
+                the_post_thumbnail();
+                the_title();
+                the_content();
+          }
+          
+
+
+
+          ?>
+ 
           <div class="carousel-item active">
             <div class="container">
               <div class="col-lg-10 col-md-11 mx-auto">
@@ -222,7 +217,7 @@
       </div>
     </section>
     <!-- end slider section -->
-  </div>
+</div>
 
 
   <!-- Us section -->
@@ -462,63 +457,12 @@
 
   <!-- end contact section -->
 
-  <!-- info section -->
-  <section class="info_section layout_padding2">
-    <div class="container">
-      <div class="info_items">
-        <a href="">
-          <div class="item ">
-            <div class="img-box box-1">
-              <img src="" alt="">
-            </div>
-            <div class="detail-box">
-              <p>
-                Location
-              </p>
-            </div>
-          </div>
-        </a>
-        <a href="">
-          <div class="item ">
-            <div class="img-box box-2">
-              <img src="" alt="">
-            </div>
-            <div class="detail-box">
-              <p>
-                +02 1234567890
-              </p>
-            </div>
-          </div>
-        </a>
-        <a href="">
-          <div class="item ">
-            <div class="img-box box-3">
-              <img src="" alt="">
-            </div>
-            <div class="detail-box">
-              <p>
-                demo@gmail.com
-              </p>
-            </div>
-          </div>
-        </a>
-      </div>
-    </div>
-  </section>
 
-  <!-- end info_section -->
+  <!-- footer -->
+  <?php get_footer();?>
 
-  <!-- footer section -->
-  <footer class="container-fluid footer_section">
-    <p>
-      &copy; 2020 All Rights Reserved. Design by
-      <a href="https://html.design/">Free Html Templates</a>
-    </p>
-  </footer>
-  <!-- footer section -->
-
-  <script src="js/jquery-3.4.1.min.js"></script>
-  <script src="js/bootstrap.js"></script>
+  <script src="<?php echo get_template_directory_uri()."/assets/js/jquery-3.4.1.min.js"?>"></script>
+  <script src="<?php echo get_template_directory_uri()."/assets/js/bootstrap.js"?>"></script>
 
 </body>
 
